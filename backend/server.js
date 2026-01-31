@@ -20,6 +20,10 @@ app.use(express.json());
 //     next();
 // })
 
+app.get('/', (req, res) => {
+    res.send('Welcome to the Song List API');
+});
+
 //routes
 app.use('/api/songs', songRoutes);
 
