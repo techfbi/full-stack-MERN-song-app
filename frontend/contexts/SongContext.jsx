@@ -19,6 +19,17 @@ const SongContextProvider = ({ children }) => {
       await api.get("/ping");
       console.log("Backend is awake!");
       setBackendReady(true); // mark backend as ready
+      // Now we will fetch the songs after backend is confirmed awake
+      try {
+        const response = await api.get("/api/songs");
+        const data = response.data;
+        setSongs(data);
+        setLoading(false);
+        setError(null);
+      } catch (error) {
+        setError("Error fetching songs");
+        console.error("Error fetching songs:", error);
+      }
     } catch (err) {
       console.log("Backend is still asleep, retrying in 3 seconds...");
       setTimeout(wakeBackend, 3000); // retry after 3 seconds
@@ -30,30 +41,32 @@ const SongContextProvider = ({ children }) => {
   }, []);
   //-------------------------------------------------------------------------------
 
-  useEffect(() => {
-    const getSongs = async () => {
-      if (backendReady) {
-        try {
-          const response = await api.get("/api/songs");
-          const data = response.data;
-          setSongs(data);
-          setLoading(false);
-          setError(null);
-        } catch (error) {
-          setError("Error fetching songs");
-          console.error("Error fetching songs:", error);
-        }
-      }
-    };
+  // THIS WAS USED TO FETCH SONGS DIRECTLY WITHOUT THE WAKE-UP LOGIC
 
-    getSongs();
+  // useEffect(() => {
+  //   const getSongs = async () => {
+  //     if (backendReady) {
+  //       try {
+  //         const response = await api.get("/api/songs");
+  //         const data = response.data;
+  //         setSongs(data);
+  //         setLoading(false);
+  //         setError(null);
+  //       } catch (error) {
+  //         setError("Error fetching songs");
+  //         console.error("Error fetching songs:", error);
+  //       }
+  //     }
+  //   };
 
-    // const timer = setTimeout(() => {
-    //   getSongs();
-    // }, 2000); // 2 second delay for demonstration
+  //   getSongs();
 
-    // return () => clearTimeout(timer); // Cleanup timeout on unmount
-  }, []);
+  //   // const timer = setTimeout(() => {
+  //   //   getSongs();
+  //   // }, 2000); // 2 second delay for demonstration
+
+  //   // return () => clearTimeout(timer); // Cleanup timeout on unmount
+  // }, []);
   //-------------------------------------------------------------------------------
 
   const deleteSong = async (id) => {
