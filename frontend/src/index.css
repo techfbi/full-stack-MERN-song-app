@@ -1,0 +1,672 @@
+/* Reset a bit */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Montserrat", sans-serif;
+}
+
+/* Navbar container, with active state styling */
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 3rem 6rem;
+  background-color: #111;
+  color: #fff;
+  margin-bottom: 50px;
+}
+
+.navbar a {
+  text-decoration: none;
+  color: white;
+  position: relative;
+  padding-bottom: 4px;
+}
+
+/* Logo / title */
+.navbar h1 {
+  font-size: 1.4rem;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+}
+
+/* Menu list */
+.navbar ul {
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
+}
+
+/* Menu items */
+.navbar li {
+  cursor: pointer;
+  font-size: 1rem;
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+/* Hover underline animation */
+.navbar a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 0;
+  height: 2px;
+  background-color: #2ecc71;
+  transition: width 0.3s ease;
+}
+
+.navbar a:hover,
+.navbar a.active {
+  color: #2ecc71;
+  font-weight: 500;
+}
+
+.navbar a:hover::after,
+.navbar a.active::after {
+  width: 100%;
+}
+/* ---------------------------------------------------------*/
+
+/* rate and date container */
+.rate-date {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 8px;
+  font-size: 13px;
+  color: #555;
+}
+
+
+.rate {
+  font-weight: bold;
+  color: #2f7d32; /* your green theme */
+}
+
+.date {
+  color: #777;
+  font-size: 12px;
+}
+/*---------------------------------------------------------*/
+
+/* Main container for song list and form */
+.songlist {
+  display: flex;
+  flex-direction: row;
+  padding: 0 1rem;
+  width: 80%;
+  margin: 0 auto;               /* center horizontally */
+  gap: 50px;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 20px;
+  color: #777;
+  font-size: 15px;
+  font-style: italic;
+}
+
+.formside {
+  flex: 1;
+}
+.listside {
+  flex: 1;
+}
+.listside > small {
+  color: #1c1c1c;
+  font-style: italic;
+  max-width: 500px;
+  display: block;
+  margin: 0 auto;
+}
+.listside {
+  margin-bottom: 80px;
+}
+
+.skeleton-loader {
+  max-width: 500px;              /* not full width */
+}
+
+
+
+.title-del {
+  display: flex;
+  justify-content: space-between;
+}
+.title-del > h2 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.edit-icon {
+  cursor: pointer;
+  color: #4e4c4c3b;          /* light gray */
+  transition: color 0.2s ease; 
+}
+.editform > input {
+  text-align: left;
+  height: 25px;
+  border: none;
+  background: transparent;
+  max-width: 80%;
+}
+.editform > input:focus {
+    outline: none;
+    box-shadow: inset 0 -2px 0 0 #4142425d;
+}
+.edit-title {
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: #2ecc71;                /* green bold text */
+  padding-bottom: 5px;
+}
+.edit-artist {
+  font-size: 0.85rem;
+  color: #555;
+  margin-bottom: 20px;
+  text-align: left;
+  height: 25px;
+  border: none;
+  background: transparent;
+  max-width: 70%;
+}
+.edit-artist:focus {
+    outline: none;
+    box-shadow: inset 0 -2px 0 0 #4142425d;
+}
+.editform button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+.art-check-cont {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: none;
+  outline: none;
+}
+.save-btn {
+  color: #2f7d32;
+}
+
+
+.del-icon {
+  cursor: pointer;
+  color: #4e4c4c3b;          /* light gray */
+  transition: color 0.2s ease; 
+}
+.del-icon:hover {
+  color: #e74c3c;             /* red on hover */
+}
+
+.eachsongs {
+  max-width: 500px;              /* not full width */
+  margin: 5px auto;              /* 5px top & bottom, centered horizontally */
+  padding: 16px 20px;            /* good whitespace */
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08); /* soft shadow */
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+}
+.eachsongs *  {
+  min-width: 0; /* prevent overflow */
+}
+
+/* Song title */
+.eachsongs h2 {
+  color: #2ecc71;                /* green bold text */
+  font-weight: 700;
+  font-size: 1.1rem;
+  margin-bottom: 6px;
+  word-wrap: break-word;
+  overflow-wrap: anywhere;
+  white-space: normal;
+}
+
+.eachsongs > div:last-child {
+  flex: 1;
+  min-width: 0; /* prevent overflow */
+}
+
+/* Artist name */
+.eachsongs p {
+  color: #555;
+  font-size: 0.85rem;
+}
+.eachsongs:hover {
+  transform: translateY(-2px);
+  transition: transform 0.2s ease;
+}
+.cont-img img {
+  height: 40px;
+}
+.cont-img {
+  width: 50px;
+  height: 50px;
+  background-color: azure;
+  border-radius: 50%;
+  place-content: center;
+}
+
+.form-title {
+  margin-bottom: 20px;
+  font-weight: 700;
+  font-size: 1.5rem;
+}
+.addsong-form {
+  max-width: 500px;              /* same width as cards */
+  margin: 10px auto 40px;        /* space from cards */
+  padding: 0 20px;
+
+  background-color: #fff;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Labels */
+.addsong-form label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #333;
+}
+
+/* Inputs */
+.addsong-form input {
+  padding: 10px 12px;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  outline: none;
+  border: #11111100 solid 0.2px;
+  background-color: #f2f1f1;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Input focus */
+.addsong-form input:focus {
+  border-color: #2ecc71;
+  box-shadow: 0 0 0 2px rgba(46, 204, 113, 0.2);
+}
+
+.rate-field {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 10px 0;
+}
+
+.rate-field label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.rate-field select {
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.rate-field select:focus {
+  outline: none;
+  border-color: #2f7d32;
+  box-shadow: 0 0 0 2px rgba(47, 125, 50, 0.2);
+}
+
+.rate-field span {
+  font-weight: bold;
+  color: #555;
+}
+
+/* Submit button */
+.addsong-form button {
+  margin-top: 10px;
+  padding: 10px;
+  border: none;
+  border-radius: 6px;
+  background-color: #2ecc71;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+/* Button hover */
+.addsong-form button:hover {
+  background-color: #27ae60;
+  transform: translateY(-1px);
+}
+
+/*-------------------------------------------------------*/
+
+/* Success and error */
+.error{
+    position: fixed;
+    top: 2%;                 /* stick to the top */
+    left: 50%;              /* move to the middle horizontally */
+    transform: translateX(-50%); /* perfect centering */
+    z-index: 9999;          /* stay above all elements */
+    background: #ff4d4d; 
+    color: white;
+    font-weight: 500;
+    text-align: center;
+    padding: 12px 25px;          
+    border-radius: 10px;
+    opacity: 1;
+    font-size: 0.8rem;
+    transition: transform 0.6s ease-out, opacity 0.6s ease-out;
+}
+/* hide class to animate the error message to slide up and disappear */
+.error.hide {
+    opacity: 0;
+    transform: translate(-50%, -60px);
+}
+
+.success {
+    position: fixed;
+    top: 2%;                 /* stick to the top */
+    left: 50%;              /* move to the middle horizontally */
+    transform: translateX(-50%); /* perfect centering */
+    z-index: 9999;          /* stay above all elements */
+    background: #4BB543; 
+    color: white;
+    font-weight: 500;
+    text-align: center;
+    padding: 12px 25px;          
+    border-radius: 10px;
+    opacity: 1;
+    font-size: 0.8rem;
+    transition: transform 0.6s ease-out, opacity 0.6s ease-out;
+}
+.success.hide {
+    opacity: 0;
+    transform: translate(-50%, -60px);
+}
+/* ---------------------------------------------------------------*/
+
+.about-page, .contact-page {
+  margin: 0 auto;
+  max-width: 500px;
+  padding: 20px;
+  text-align: center;
+  line-height: 30px;
+}
+
+.about-page h2, .contact-page h2 {
+  font-size: 1.8rem;
+  margin-bottom: 15px;
+  color: #2ecc71;
+}
+
+/*-------------------------------------------------------------*/
+/* Sort bar styles */
+.sort-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  max-width: 500px;
+  margin: 20px auto 20px; /* center + spacing from list */
+}
+
+/* Dropdown */
+.sort-bar select {
+  flex: 1;
+  padding: 10px 12px;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+  background-color: #fff;
+  font-size: 14px;
+  cursor: pointer;
+  outline: none;
+  transition: border 0.2s ease, box-shadow 0.2s ease;
+}
+
+.sort-bar select:focus {
+  border-color: #2ecc71;
+  box-shadow: 0 0 0 2px rgba(46, 204, 113, 0.2);
+}
+
+/* Button */
+.sort-bar button {
+  padding: 10px 14px;
+  border-radius: 6px;
+  border: none;
+  background-color: #111;
+  color: #2ecc71;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.2s ease, transform 0.15s ease;
+}
+
+/* Hover */
+.sort-bar button:hover {
+  background-color: #222;
+  transform: translateY(-1px);
+}
+
+/* Click feedback */
+.sort-bar button:active {
+  transform: scale(0.96);
+}
+
+/* Modal and Overlay */
+/* Overlay */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  height: 100vh;
+  width: 100vw;
+
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(1px);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  z-index: 9999;
+}
+
+/* Modal box */
+.modal {
+  background: white;
+  padding: 25px;
+  border-radius: 12px;
+  width: 320px;
+
+  animation: popup 0.3s ease;
+}
+
+/* Inputs */
+.modal input,
+.modal button {
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+}
+
+/* Animation */
+@keyframes popup {
+  from {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+/*---------------------------------------------------------*/
+
+/* The float + button for add */
+.fab-btn {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+
+  width: 55px;
+  height: 55px;
+
+  border-radius: 50%;
+  border: none;
+
+  background-color: #2ecc71;
+  color: white;
+
+  font-size: 28px;
+  font-weight: bold;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  z-index: 1000;
+}
+/* Hover effect */
+.fab-btn:hover {
+  transform: scale(1.1);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+}
+/* Click effect */
+.fab-btn:active {
+  transform: scale(0.95);
+}
+/*---------------------------------------------------------*/
+
+
+
+@media (max-width: 1200px) {
+  .songlist {
+    width: 90%;
+    gap: 30px;
+  }
+}
+
+@media (max-width: 820px) {
+  .navbar {
+    padding: 3rem 3rem;
+  }
+  .form-title {
+    font-size: 1.3rem;
+  }
+  .addsong-form {
+    padding: 0 10px;
+  }
+
+}
+
+@media (max-width: 768px) {
+  .songlist {
+    flex-direction: column;
+    gap: 40px;
+  }
+  .editform > input {
+    font-size: 16px;
+  }
+  .addsong-form input {
+    font-size: 16px;
+  }
+  .edit-artist {
+    font-size: 16px;
+    transform: scale(0.8); /* scale down to 80% so the 16px is visually smaller */
+    transform-origin: left center;
+  }
+  .eachsongs h2 {
+    font-size: 1rem;
+  }
+  .eachsongs p {
+    font-size: 0.75rem;
+  }
+  .rate-date {
+    font-size: 11px;
+  }
+  .date {
+    font-size: 11px;
+  }
+  .form-title {
+    font-size: 1.1rem;
+  }
+  .addsong-form label {
+    font-size: 0.8rem;
+  }
+  .rate-field select {
+    font-size: 16px;
+    transform: scale(0.9); /* scale down to 80% so the 16px is visually smaller */
+    transform-origin: left center;
+
+  }
+  .rate-field span {
+    font-size: 0.8rem;
+  }
+  .addsong-form button {
+    font-size: 0.9rem;
+  }
+  .sort-bar select {
+    font-size: 16px;
+    transform: scale(0.9); /* scale down to 80% so the 16px is visually smaller */
+    transform-origin: left center;
+
+  }
+  .songlist {
+    padding: 0;
+  }
+  .about-page h2, .contact-page h2 {
+    font-size: 1.2rem;
+  }
+  .about-page, .contact-page {
+    line-height: 20px;
+    font-size: 0.9rem;
+  }
+}
+
+
+@media (max-width: 480px) {
+  .navbar {
+    padding: 2rem 1rem;
+  }
+  .navbar h1 {
+    font-size: 1.1rem;
+  }
+  .navbar > ul > li {
+    font-size: 0.8rem;
+  }
+  .navbar ul {
+    gap: 1rem;
+  }
+  .about-page h2, .contact-page h2 {
+    font-size: 1rem;
+  }
+  .about-page, .contact-page {
+    line-height: normal;
+    font-size: 0.8rem;
+  }
+  .success, .error {
+    font-size: 0.6rem;
+    padding: 10px;
+  }
+}
