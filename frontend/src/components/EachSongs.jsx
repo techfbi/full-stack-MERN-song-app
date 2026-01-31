@@ -61,7 +61,7 @@ function EachSongs({ title, artist, rate, created, id }) {
   return (
     <div className="eachsongs">
       <div className="cont-img">
-        <img src="/public/assets/musical-note.png" alt="musical note" />
+        <img src="/assets/musical-note.png" alt="musical note" />
       </div>
       <div>
         {!showEdit && (

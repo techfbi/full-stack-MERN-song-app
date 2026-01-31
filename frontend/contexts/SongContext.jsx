@@ -23,11 +23,13 @@ const SongContextProvider = ({ children }) => {
       }
     };
 
-    const timer = setTimeout(() => {
-      getSongs();
-    }, 2000); // 2 second delay for demonstration
+    getSongs();
 
-    return () => clearTimeout(timer); // Cleanup timeout on unmount
+    // const timer = setTimeout(() => {
+    //   getSongs();
+    // }, 2000); // 2 second delay for demonstration
+
+    // return () => clearTimeout(timer); // Cleanup timeout on unmount
   }, []);
 
   const deleteSong = async (id) => {
