@@ -24,6 +24,12 @@ app.get('/', (req, res) => {
     res.send('Welcome to the Song List API');
 });
 
+//ping route to check if server is awake
+app.get("/ping", (req, res) => {
+  res.json({ status: "awake" });
+});
+
+
 //routes
 app.use('/api/songs', songRoutes);
 

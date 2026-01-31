@@ -4,22 +4,45 @@ import api from "../src/components/Api";
 export const SongContext = createContext();
 
 const SongContextProvider = ({ children }) => {
+  //-------------------------------------------------------------------------------
   const [songs, setSongs] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
+  const [backendReady, setBackendReady] = useState(false);
+  //-------------------------------------------------------------------------------
+
+  // This is for RENDER DEPLOY sake to check if the backend is awake so that users wont get errors when they first visit the site
+  // Function to "wake" the backend
+  const wakeBackend = async () => {
+    try {
+      await api.get("/ping");
+      console.log("Backend is awake!");
+      setBackendReady(true); // mark backend as ready
+    } catch (err) {
+      console.log("Backend is still asleep, retrying in 3 seconds...");
+      setTimeout(wakeBackend, 3000); // retry after 3 seconds
+    }
+  };
+
+  useEffect(() => {
+    wakeBackend(); // trigger wake-up on frontend load
+  }, []);
+  //-------------------------------------------------------------------------------
 
   useEffect(() => {
     const getSongs = async () => {
-      try {
-        const response = await api.get("/api/songs");
-        const data = response.data;
-        setSongs(data);
-        setLoading(false);
-        setError(null);
-      } catch (error) {
-        setError("Error fetching songs");
-        console.error("Error fetching songs:", error);
+      if (backendReady) {
+        try {
+          const response = await api.get("/api/songs");
+          const data = response.data;
+          setSongs(data);
+          setLoading(false);
+          setError(null);
+        } catch (error) {
+          setError("Error fetching songs");
+          console.error("Error fetching songs:", error);
+        }
       }
     };
 
@@ -31,6 +54,7 @@ const SongContextProvider = ({ children }) => {
 
     // return () => clearTimeout(timer); // Cleanup timeout on unmount
   }, []);
+  //-------------------------------------------------------------------------------
 
   const deleteSong = async (id) => {
     try {
