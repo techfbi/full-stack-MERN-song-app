@@ -24,13 +24,15 @@ export default function BackgroundLetterAvatars({ name, size }) {
   function stringAvatar(name, size) {
     return {
       sx: {
-        bgcolor: stringToColor(name),
+        bgcolor: name ? stringToColor(name) : "#ccc", // backgroung color light grey if no name
         width: size,
         height: size,
         fontSize: size / 2,
         fontWeight: "bold",
       },
-      children: `${name.split(" ")[0][0]}${name.split(" ")[1][0]}`,
+      children: name
+        ? `${name.split(" ")[0][0]}${name.split(" ")[1][0]}`
+        : null,
     };
   }
 

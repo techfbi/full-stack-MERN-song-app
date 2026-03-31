@@ -28,7 +28,7 @@ const Profile = () => {
   return (
     <div className="profile-container">
       <div className="avatar-container" style={{ marginBottom: "30px" }}>
-        <BackgroundLetterAvatars name={user.email} size={100} />
+        <BackgroundLetterAvatars name={""} size={100} />
       </div>
       <h1>
         {greeting} 👋,{" "}

@@ -898,6 +898,9 @@ input {
 
 
 @media (max-width: 480px) {
+  .profile-container h1 {
+    font-size: 1rem;
+  }
   .MuiFormControlLabel-label {
   font-family: inherit !important;
   font-size: 14px !important;
