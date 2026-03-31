@@ -4,6 +4,7 @@ import api from "../components/Api";
 import useAuthContext from "../../hooks/useAuthContext";
 import CircularIndeterminate from "../components/CircularLoading";
 import { motion, AnimatePresence } from "framer-motion"; //Thia is for animation
+import CheckboxLabels from "../components/Checkbox";
 
 const Signup = () => {
   const [email, setEmail] = useState("");
@@ -127,38 +128,11 @@ const Signup = () => {
                     onChange={(e) => setSecurityAns(e.target.value)}
                     required
                   />
-
-                  <div
-                    className="ans-checkbox"
-                    style={{
-                      whiteSpace: "nowrap",
-                      textAlign: "left",
-                    }}
-                  >
-                    <label
-                      htmlFor="checkbox"
-                      style={{
-                        display: "inline-flex", // <-- use inline-flex so it doesn’t force line break
-                        gap: "5px", // space between checkbox and text
-                        cursor: "pointer", // makes it clickable
-                        fontSize: "14px",
-                      }}
-                    >
-                      <input
-                        id="checkbox"
-                        style={{
-                          cursor: "pointer",
-                          transform: "scale(1.1)",
-                          marginTop: "2px",
-                        }}
-                        type="checkbox"
-                        checked={show}
-                        onChange={(e) => setShow(e.target.checked)}
-                      />
-                      Show Answer
-                    </label>
-                  </div>
                 </div>
+                <CheckboxLabels
+                  checked={show}
+                  onChange={(e) => setShow(e.target.checked)}
+                />
 
                 <button disabled={isLoading} type="submit" className="submit">
                   {isLoading ? <CircularIndeterminate /> : "Sign Up"}

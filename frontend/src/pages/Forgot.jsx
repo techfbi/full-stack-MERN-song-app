@@ -4,6 +4,7 @@ import api from "../components/Api";
 import CircularIndeterminate from "../components/CircularLoading";
 import useAuthContext from "../../hooks/useAuthContext";
 import usePassMailContext from "../../hooks/usePassmailContext";
+import CheckboxLabels from "../components/Checkbox";
 
 const ForgotPass = () => {
   const [show, setShow] = useState(false);
@@ -146,49 +147,17 @@ const ForgotPass = () => {
                 onChange={(e) => setSecurityAns(e.target.value)}
                 required
               />
-              <div
-                className="ans-checkbox"
-                style={{
-                  whiteSpace: "nowrap",
-                  textAlign: "left",
-                }}
-              >
-                <label
-                  htmlFor="checkbox"
-                  style={{
-                    display: "inline-flex", // inline-flex so it doesn’t force line break
-                    gap: "5px", // space between checkbox and text
-                    cursor: "pointer", // makes it clickable
-                    fontSize: "14px",
-                  }}
-                >
-                  <input
-                    id="checkbox"
-                    style={{
-                      cursor: "pointer",
-                      transform: "scale(1.1)",
-                      marginTop: "2px",
-                    }}
-                    type="checkbox"
-                    checked={show}
-                    onChange={(e) => setShow(e.target.checked)}
-                  />
-                  Show Answer
-                </label>
-              </div>
-              <hr
-                style={{
-                  width: "100%",
-                  opacity: "0.2",
-                  marginBottom: "30px",
-                  borderTop: "1px solid rgba(255,255,255,0.2)",
-                }}
+
+              <CheckboxLabels
+                checked={show}
+                onChange={(e) => setShow(e.target.checked)}
               />
               <input
                 type="password"
                 placeholder="Input new password"
                 value={newPassword}
                 onChange={(e) => setNewPassword(e.target.value)}
+                style={{ marginTop: "20px" }}
                 required
               />
               <input
