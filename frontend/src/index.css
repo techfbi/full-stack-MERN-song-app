@@ -902,6 +902,10 @@ input {
 
 
 @media (max-width: 480px) {
+  .login-error, .signup-error {
+  padding: 0 5px;
+  font-size: 13px;
+}
   .eye {
   opacity: 0.2;
 }
