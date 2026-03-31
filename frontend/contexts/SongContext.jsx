@@ -1,5 +1,6 @@
 import { createContext, useState, useEffect } from "react";
 import api from "../src/components/Api";
+import useAuthContext from "../hooks/useAuthContext";
 
 export const SongContext = createContext();
 
@@ -9,100 +10,84 @@ const SongContextProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
-  const [backendReady, setBackendReady] = useState(false);
+  const { user } = useAuthContext();
   //-------------------------------------------------------------------------------
 
-  // This is for RENDER DEPLOY sake to check if the backend is awake so that users wont get errors when they first visit the site
-  // Function to "wake" the backend
-  const wakeBackend = async () => {
-    try {
-      await api.get("/ping");
-      console.log("Backend is awake!");
-      setBackendReady(true); // mark backend as ready
-      // Now we will fetch the songs after backend is confirmed awake
-      try {
-        const response = await api.get("/api/songs");
-        const data = response.data;
-        setSongs(data);
-        setLoading(false);
-        setError(null);
-      } catch (error) {
-        setError("Error fetching songs");
-        console.error("Error fetching songs:", error);
-      }
-    } catch (err) {
-      console.log("Backend is still asleep, retrying in 3 seconds...");
-      setTimeout(wakeBackend, 3000); // retry after 3 seconds
-    }
-  };
-
+  // Fetch songs from the backend when the component mounts
   useEffect(() => {
-    wakeBackend(); // trigger wake-up on frontend load
-  }, []);
-  //-------------------------------------------------------------------------------
+    const getUserSongs = async () => {
+      if (user) {
+        try {
+          const response = await api.get("/api/songs", {
+            headers: {
+              Authorization: `Bearer ${user.accessToken}`,
+            },
+          });
+          const data = response.data;
+          setSongs(data);
+          setLoading(false);
+          setError(null);
+        } catch (error) {
+          setError("Error fetching songs");
+          console.error("Error fetching songs:", error);
+        }
+      }
+    };
 
-  // THIS WAS USED TO FETCH SONGS DIRECTLY WITHOUT THE WAKE-UP LOGIC
-
-  // useEffect(() => {
-  //   const getSongs = async () => {
-  //     if (backendReady) {
-  //       try {
-  //         const response = await api.get("/api/songs");
-  //         const data = response.data;
-  //         setSongs(data);
-  //         setLoading(false);
-  //         setError(null);
-  //       } catch (error) {
-  //         setError("Error fetching songs");
-  //         console.error("Error fetching songs:", error);
-  //       }
-  //     }
-  //   };
-
-  //   getSongs();
-
-  //   // const timer = setTimeout(() => {
-  //   //   getSongs();
-  //   // }, 2000); // 2 second delay for demonstration
-
-  //   // return () => clearTimeout(timer); // Cleanup timeout on unmount
-  // }, []);
+    getUserSongs(); // trigger song fetch on frontend load
+  }, [user]); // Re-run when user changes (e.g., login/logout)
   //-------------------------------------------------------------------------------
 
   const deleteSong = async (id) => {
-    try {
-      const response = await api.delete(`/api/songs/${id}`);
-      setSongs((prevSongs) => prevSongs.filter((song) => song._id !== id));
-      if (response.data.error) {
-        setError(response.data.error);
+    if (user) {
+      try {
+        const response = await api.delete(`/api/songs/${id}`, {
+          headers: {
+            Authorization: `Bearer ${user.accessToken}`,
+          },
+        });
+        setSongs((prevSongs) => prevSongs.filter((song) => song._id !== id));
+        if (response.data.error) {
+          setError(response.data.error);
+        }
+        setError(null);
+        console.log("Song deleted successfully:");
+      } catch (error) {
+        setError("Problem deleting the song");
+        console.error("Error deleting song:");
       }
-      setError(null);
-      console.log("Song deleted successfully:");
-    } catch (error) {
-      setError("Problem deleting the song");
-      console.error("Error deleting song:");
     }
   };
 
   const updateSong = async (id, title, artist) => {
-    try {
-      const response = await api.patch(`/api/songs/${id}`, {
-        title,
-        artist,
-      });
-      const data = response.data;
-      setSongs((prevSongs) =>
-        prevSongs.map((song) =>
-          song._id === id ? { ...song, title, artist } : song
-        )
-      );
-      setError(null);
-      setSuccess(data.message);
-      console.log("Song updated successfully:");
-    } catch (error) {
-      setError("Problem updating the song");
-      setSuccess(null);
-      console.error("Error updating song:");
+    if (user) {
+      try {
+        const response = await api.patch(
+          `/api/songs/${id}`,
+          {
+            title,
+            artist,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${user.accessToken}`,
+            },
+          },
+        );
+        const data = response.data;
+        setSongs((prevSongs) =>
+          prevSongs.map((song) =>
+            song._id === id ? { ...song, title, artist } : song,
+          ),
+        );
+        setError(null);
+        setSuccess(data.message);
+        console.log("Song updated successfully:");
+      } catch (error) {
+        setError("Problem updating the song");
+        setSuccess(null);
+        console.error("Error updating song:");
+      }
     }
   };
 

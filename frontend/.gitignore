@@ -12,6 +12,11 @@ dist
 dist-ssr
 *.local
 
+# files to ignore
+pendingUser.js
+utils/
+sendEmail.js
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

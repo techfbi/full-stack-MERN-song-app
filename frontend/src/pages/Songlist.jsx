@@ -1,12 +1,12 @@
-import AddSong from "./AddSong";
-import EachSongs from "./EachSongs";
+import AddSong from "../components/AddSong";
+import EachSongs from "../components/EachSongs";
 import { useEffect, useContext, useState } from "react";
 import { SongContext } from "../../contexts/SongContext";
 import Box from "@mui/material/Box";
 import Skeleton from "@mui/material/Skeleton";
-import Sort from "./Sort";
+import Sort from "../components/Sort";
 import { motion, AnimatePresence } from "framer-motion"; //Thia is for animation
-import Modal from "./Modal";
+import Modal from "../components/Modal";
 
 //-------------------------------------------------------------------------------
 
@@ -15,7 +15,6 @@ function SongList() {
     useContext(SongContext);
   const [open, setOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
-
   //-------------------------------------------------------------------------------
 
   // Clear success and error messages after 5 seconds
@@ -54,7 +53,7 @@ function SongList() {
           <>
             <small>
               You currently have <strong> {songs.length} </strong> song
-              {songs.length > 1 && "s"} in the list.
+              {songs.length > 1 && "s"} on the list.
             </small>
             <Sort />
           </>

@@ -1,22 +1,12 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import SongModel from '../models/songmodels.js';
+import requireAuth from '../middleware/requireAuth.js';
+import limiter from '../middleware/rateLimiter.js';
+
 const router = express.Router();
 
-// all routes
-
-//GET all songs
-router.get("/", async (req, res) =>{
-    try {
-      const songs = await SongModel.find({}).sort({createdAt: -1}); //its sorted in descending order (newer first)
-      res.status(200).json(songs);
-    } catch (error) {
-      res.status(400).json({error: error.message});
-    }
-})
-
-
-
+//----------------------------------------------------------------------------------------
 // POST sorted songs
 router.post("/sort", async (req, res) => {
   let { sortBy, order } = req.body;
@@ -45,6 +35,24 @@ router.post("/sort", async (req, res) => {
   }
 
 });
+//----------------------------------------------------------------------------------------
+//middleware
+
+router.use(limiter); // Apply rate limiting to all routes after this line
+
+router.use(requireAuth); //all routes after this line will require authentication
+
+//GET all songs
+router.get("/", async (req, res) =>{
+  const user_id = req.user._id; // Get the authenticated user's ID from the request object
+    try {
+      const songs = await SongModel.find({user_id}).sort({createdAt: -1}); //its sorted in descending order (newer first)
+      res.status(200).json(songs);
+    } catch (error) {
+      console.error("Error fetching songs for user:", user_id, error);
+      res.status(400).json({error: error.message});
+    }
+})
 
 
 
@@ -57,10 +65,11 @@ router.get('/:id', (req, res) => {
 
 // POST a song
 router.post('/', async (req, res) => {
+  const user_id = req.user._id; // Get the authenticated user's ID from the request object
   const {title, artist, rate} = req.body;
 
   try {
-    const song = await SongModel.create({title, artist, rate});
+    const song = await SongModel.create({title, artist, rate, user_id});
     res.status(200).json(song);
   } catch (error) {
     res.status(400).json({error: error.message});

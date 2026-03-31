@@ -14,9 +14,13 @@ const songSchema = new Schema({
     rate: {
         type: Number,
         required: true
+    },
+    user_id: {
+        type: String,
+        required: true
     }
 }, { timestamps: true });
 
-//create a model from the schema and export it. Model name is 'Song'
+//create a model from the schema and export it. Model name is 'SongModel'
 
 export default mongoose.model('SongModel', songSchema);

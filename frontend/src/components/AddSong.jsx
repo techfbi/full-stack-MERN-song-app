@@ -1,9 +1,10 @@
 import { useState, useContext, useEffect } from "react";
 import api from "./Api";
 import { SongContext } from "../../contexts/SongContext";
-import Modal from "./Modal";
+import useAuthContext from "../../hooks/useAuthContext";
+import CircularIndeterminate from "../components/CircularLoading";
 
-function AddSong({ isOpen, setOpen }) {
+function AddSong() {
   const { setSongs } = useContext(SongContext);
   const [music, setMusic] = useState({
     title: "",
@@ -12,12 +13,18 @@ function AddSong({ isOpen, setOpen }) {
   });
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(false);
-  const [adding, setAdding] = useState(true);
+  const [adding, setAdding] = useState(false);
+  const { user } = useAuthContext();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setAdding(true);
     try {
-      const response = await api.post("/api/songs", music);
+      const response = await api.post("/api/songs", music, {
+        headers: {
+          Authorization: `Bearer ${user.accessToken}`,
+        },
+      });
       const data = response.data;
 
       setMusic({
@@ -32,6 +39,7 @@ function AddSong({ isOpen, setOpen }) {
     } catch (error) {
       setError("Failed to add song. Please try again.");
       setSuccess(false);
+      setAdding(false);
       console.error("Error adding song:", error);
     }
   };
@@ -92,7 +100,9 @@ function AddSong({ isOpen, setOpen }) {
             <span>/ 10</span>
           </div>
 
-          <button type="submit">Add Song</button>
+          <button disabled={adding} type="submit">
+            {adding ? <CircularIndeterminate /> : "Add Song"}
+          </button>
         </form>
       </div>
     </>
