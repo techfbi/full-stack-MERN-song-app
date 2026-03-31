@@ -1,5 +1,5 @@
 import { createContext, useReducer, useEffect } from "react";
-import api, { setUpdateAccessTokenCallback } from "../src/components/Api";
+import { setUpdateAccessTokenCallback } from "../src/components/Api";
 
 export const AuthContext = createContext();
 

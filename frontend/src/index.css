@@ -624,6 +624,9 @@
 /*---------------------------------------------------------*/
 
 /* Login and Signup */
+.eye {
+  opacity: 0.4;
+}
 
 .login-page, .signup-page, .forgot-page {
   display: flex;
@@ -662,6 +665,7 @@
 
 form {
   margin-top: 20px;
+  padding: 15px;
 }
 
 input {
@@ -743,6 +747,7 @@ input {
   background: #2ecc71;
   color: #fff;
   font-weight: 600;
+  font-size: 1rem;
   cursor: pointer;
   margin: 20px 0;
   transition: background 0.3s ease;
@@ -889,6 +894,22 @@ input {
 
 
 @media (max-width: 480px) {
+  .login-heading, .signup-heading, .forgot-heading {
+  margin: 7px 0;
+  font-size: 20px;
+  }
+  .small-heading {
+  font-size: 13px;
+  margin-bottom: 10px;
+  }
+  .sec-question label {
+    font-size: 14px;
+  }
+  .submit {
+    font-size: 14px;
+    padding: 8px;
+    width: 40%;
+  }
   .navbar {
     padding: 2rem 1rem;
   }

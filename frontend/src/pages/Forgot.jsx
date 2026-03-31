@@ -133,6 +133,7 @@ const ForgotPass = () => {
                   display: "flex",
                   marginBottom: "10px",
                   fontWeight: "600",
+                  fontSize: "14px",
                 }}
               >
                 {question}
@@ -156,17 +157,17 @@ const ForgotPass = () => {
                   htmlFor="checkbox"
                   style={{
                     display: "inline-flex", // inline-flex so it doesn’t force line break
-                    gap: "0.5rem", // space between checkbox and text
+                    gap: "5px", // space between checkbox and text
                     cursor: "pointer", // makes it clickable
-                    marginBottom: "25px",
+                    fontSize: "14px",
                   }}
                 >
                   <input
                     id="checkbox"
                     style={{
                       cursor: "pointer",
-                      transform: "scale(1.4)",
-                      marginRight: "6px",
+                      transform: "scale(1.1)",
+                      marginTop: "2px",
                     }}
                     type="checkbox"
                     checked={show}
@@ -175,6 +176,14 @@ const ForgotPass = () => {
                   Show Answer
                 </label>
               </div>
+              <hr
+                style={{
+                  width: "100%",
+                  opacity: "0.2",
+                  marginBottom: "30px",
+                  borderTop: "1px solid rgba(255,255,255,0.2)",
+                }}
+              />
               <input
                 type="password"
                 placeholder="Input new password"
@@ -195,6 +204,7 @@ const ForgotPass = () => {
                 disabled={isLoading}
                 type="submit"
                 className="submit"
+                style={{ width: "50%" }}
               >
                 {isLoading ? <CircularIndeterminate /> : "Change Password"}
               </button>

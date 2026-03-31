@@ -36,7 +36,7 @@ const Sort = () => {
       </select>
 
       <button onClick={() => setOrder(order === "asc" ? "desc" : "asc")}>
-        {order === "asc" ? "⬆ Asc" : "⬇ Desc"}
+        {order === "asc" ? "↑ Asc" : "↓ Desc"}
       </button>
     </div>
   );

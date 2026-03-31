@@ -139,16 +139,17 @@ const Signup = () => {
                       htmlFor="checkbox"
                       style={{
                         display: "inline-flex", // <-- use inline-flex so it doesn’t force line break
-                        gap: "0.5rem", // space between checkbox and text
+                        gap: "5px", // space between checkbox and text
                         cursor: "pointer", // makes it clickable
+                        fontSize: "14px",
                       }}
                     >
                       <input
                         id="checkbox"
                         style={{
                           cursor: "pointer",
-                          transform: "scale(1.4)",
-                          marginRight: "6px",
+                          transform: "scale(1.1)",
+                          marginTop: "2px",
                         }}
                         type="checkbox"
                         checked={show}
