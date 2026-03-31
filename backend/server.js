@@ -6,9 +6,6 @@ import songRoutes from './routes/songroutes.js';
 import userRoutes from './routes/userRoutes.js';
 import cookieParser from 'cookie-parser'; // Import cookie-parser to handle cookies
 import helmet from "helmet";
-import path from "path";
-
-const __dirname = path.resolve();
 
 dotenv.config();
 const app = express();
@@ -66,14 +63,6 @@ app.get("/ping", (req, res) => {
 app.use('/api/users', userRoutes);
 app.use('/api/songs', songRoutes);
 
-// This is used to fix my routes redering blank pages on deployment. It serves the static files from the React build and ensures that all routes are handled by the React app, allowing for proper client-side routing in production. Without this, navigating directly to a route (e.g., /profile) would result in a 404 error because the server wouldn't know how to handle it.
-// Serve frontend
-app.use(express.static(path.join(__dirname, "frontend/dist")));
-
-// Handle React routing
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "frontend/dist/index.html"));
-});
 
 //start server
 const startserver = async () => {
