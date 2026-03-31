@@ -31,10 +31,7 @@ const Profile = () => {
         <BackgroundLetterAvatars name={""} size={100} />
       </div>
       <h1>
-        {greeting} 👋,{" "}
-        <span className="username">
-          <strong>{user.email}</strong>
-        </span>
+        {greeting} 👋, <span className="username">{user.email}</span>
       </h1>
 
       <nav>

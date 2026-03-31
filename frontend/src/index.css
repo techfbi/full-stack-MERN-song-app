@@ -600,7 +600,7 @@
 
 .username {
   font-size: 18px;
-  font-weight: 300;
+  font-weight: 400;
 }
 
 .logout-btn {
@@ -821,6 +821,10 @@ input {
 }
 
 @media (max-width: 768px) {
+  .username {
+  font-size: 16px;
+  font-weight: 400;
+}
   .navbar h1 {
     font-size: 1.1rem;
   }
@@ -898,6 +902,12 @@ input {
 
 
 @media (max-width: 480px) {
+  .eye {
+  opacity: 0.2;
+}
+  .username {
+  font-size: 1rem;
+}
   .profile-container h1 {
     font-size: 1rem;
   }
