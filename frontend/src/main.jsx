@@ -11,7 +11,7 @@ root.render(
   <StrictMode>
     <AuthContextProvider>
       <PassmailContextProvider>
-        <BrowserRouter>
+        <BrowserRouter basename="/">
           <App />
         </BrowserRouter>
       </PassmailContextProvider>
