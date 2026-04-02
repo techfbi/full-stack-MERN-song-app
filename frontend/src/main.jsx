@@ -1,4 +1,4 @@
-import { StrictMode } from "react";
+  import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 import "./index.css";
@@ -9,12 +9,12 @@ import PassmailContextProvider from "../contexts/PassmailContext.jsx";
 const root = createRoot(document.getElementById("root"));
 root.render(
   <StrictMode>
-    <AuthContextProvider>
-      <PassmailContextProvider>
-        <BrowserRouter basename="/">
+    <BrowserRouter basename="/">
+      <AuthContextProvider>
+        <PassmailContextProvider>
           <App />
-        </BrowserRouter>
-      </PassmailContextProvider>
-    </AuthContextProvider>
+        </PassmailContextProvider>
+      </AuthContextProvider>
+    </BrowserRouter>
   </StrictMode>,
 );
