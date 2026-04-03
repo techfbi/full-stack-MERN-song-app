@@ -16,23 +16,23 @@ app.set("trust proxy", 1);
 app.use(cookieParser()); // Add cookie-parser middleware to parse cookies in incoming requests
 
 // Set security headers with Helmet and configure Content Security Policy (CSP) to allow resources only from the same origin and trusted sources
-// app.use(
-//   helmet({
-//     contentSecurityPolicy: {
-//       directives: {
-//         defaultSrc: ["'self'"], //Only load resources from your own server by default.
-//         scriptSrc: ["'self'"], // Allow JavaScript only from your server.
-//         connectSrc: ["'self'", process.env.FRONTEND_URL, ], //Allow API calls to your backend and frontend (using axios or fetch).
-//         imgSrc: ["'self'", "data:", "https:"], // Allow images from your server, data URIs (for inline images), and trusted external sources (like CDNs).
-//         styleSrc: ["'self'", "'unsafe-inline'"], //Allows css files and inline css
-//         fontSrc: ["'self'", "https:", "data:"], // Allows fonts from HTTPS font CDNs, your server, base64 fonts.
-//         objectSrc: ["'none'"], //Prevents Flash / plugin injection.
-//         baseUri: ["'self'"], // Stops attackers changing how URLs resolve.
-//         frameAncestors: ["'none'"], // Prevents clickjacking by disallowing site to be framed by any site. Adjust if you need to allow framing from specific origins (e.g., for embedding in a trusted partner site).
-//       },
-//     },
-//   })
-// );
+app.use(
+  helmet({
+    contentSecurityPolicy: {
+      directives: {
+        defaultSrc: ["'self'"], //Only load resources from your own server by default.
+        scriptSrc: ["'self'"], // Allow JavaScript only from your server.
+        connectSrc: ["'self'", process.env.FRONTEND_URL, ], //Allow API calls to your backend and frontend (using axios or fetch).
+        imgSrc: ["'self'", "data:", "https:"], // Allow images from your server, data URIs (for inline images), and trusted external sources (like CDNs).
+        styleSrc: ["'self'", "'unsafe-inline'"], //Allows css files and inline css
+        fontSrc: ["'self'", "https:", "data:"], // Allows fonts from HTTPS font CDNs, your server, base64 fonts.
+        objectSrc: ["'none'"], //Prevents Flash / plugin injection.
+        baseUri: ["'self'"], // Stops attackers changing how URLs resolve.
+        frameAncestors: ["'none'"], // Prevents clickjacking by disallowing site to be framed by any site. Adjust if you need to allow framing from specific origins (e.g., for embedding in a trusted partner site).
+      },
+    },
+  })
+);
 
 app.use(
     cors({
