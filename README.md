@@ -98,6 +98,7 @@ backend/
 * Time-based feedback (e.g. “3 minutes ago”)
 * Conditional rendering (e.g. showing user email based on screen size)
 * Edit icon shows on song title mouse hover in tablet and pc, it shows on song title click in mobile
+* I used security questions as a way to verify authentic user before changing password since no mailer is implemented.
 
 ---
 
@@ -158,6 +159,7 @@ npm run dev
 * Modal-based editing
 * Responsive navigation
 * Input sanitization
+* Rate limiting for login to prevent brute force attacks 
 
 ---
 
@@ -181,6 +183,8 @@ npm run dev
 * Add pagination for large datasets
 * Add music few mins play, like when selecting music in Instagram and snapchat so users can play their added song
 * Add a general homepage for authenticated and non authenticated users
+* Add mail confirmation library
+
 
 ---
 
