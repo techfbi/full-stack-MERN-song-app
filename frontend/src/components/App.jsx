@@ -6,7 +6,7 @@ import About from "../pages/About";
 import Login from "../pages/Login";
 import Signup from "../pages/Signup";
 import Profile from "../components/Profile";
-import ForgotPass from "../pages/Forgot";
+import ForgotPass from "../pages/Forgotp";
 import ProtectedRoute from "./ProtectedRoute";
 import NotFound from "./NotFound";
 import useAuthContext from "../../hooks/useAuthContext";

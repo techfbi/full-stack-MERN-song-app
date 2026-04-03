@@ -16,6 +16,7 @@ const Login = () => {
   //------------------------------------------------------------------------------------------------------
   // This useEffect is to "wake" the backend when the frontend loads so that users won't encounter errors if they visit the site when the backend is asleep (e.g., on Render.com free tier)
   useEffect(() => {
+    let timeout;
     const wakeBackend = async (retries = 2) => {
       try {
         await api.get("/ping");
@@ -32,7 +33,9 @@ const Login = () => {
       }
     };
 
-    wakeBackend(); // call it with default retries
+    timeout = setTimeout(wakeBackend, 2000);
+
+    return () => clearTimeout(timeout);
   }, []);
   //------------------------------------------------------------------------------------------------------------
 
