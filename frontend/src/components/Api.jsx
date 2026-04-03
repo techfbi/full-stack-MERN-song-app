@@ -31,7 +31,7 @@ api.interceptors.response.use(
       originalRequest._retry = true;
 
       try {
-        console.log("Interceptor caught 401, attempting token refresh...");
+        //console.log("Interceptor caught 401, attempting token refresh...");
         const res = await api.post("/api/users/refresh");
 
         const newAccessTokenWithUser = res.data;
