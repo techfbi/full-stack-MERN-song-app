@@ -7,6 +7,10 @@ import userRoutes from './routes/userRoutes.js';
 import cookieParser from 'cookie-parser'; // Import cookie-parser to handle cookies
 import helmet from "helmet";
 import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 dotenv.config();
 const app = express();
@@ -64,8 +68,7 @@ app.get("/ping", (req, res) => {
 app.use('/api/users', userRoutes);
 app.use('/api/songs', songRoutes);
 
-app.use(express.static(path.join(__dirname, "dist")));
-
+app.use(express.static(path.join(__dirname, "dist")))
 
 app.get("*", (req, res) => {
   res.sendFile(path.resolve(__dirname, "dist", "index.html"));
