@@ -14,6 +14,7 @@ const app = express();
 app.set("trust proxy", 1);
 
 app.use(cookieParser()); // Add cookie-parser middleware to parse cookies in incoming requests
+app.use(express.static("dist"));
 
 // Set security headers with Helmet and configure Content Security Policy (CSP) to allow resources only from the same origin and trusted sources
 app.use(
@@ -64,7 +65,7 @@ app.use('/api/users', userRoutes);
 app.use('/api/songs', songRoutes);
 
 
-app.use(express.static("dist"));
+
 
 app.get("*", (req, res) => {
   res.sendFile(path.resolve(__dirname, "dist", "index.html"));
