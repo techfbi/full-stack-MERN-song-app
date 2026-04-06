@@ -64,6 +64,13 @@ app.use('/api/users', userRoutes);
 app.use('/api/songs', songRoutes);
 
 
+app.use(express.static("dist"));
+
+app.get("*", (req, res) => {
+  res.sendFile(path.resolve(__dirname, "dist", "index.html"));
+});
+
+
 //start server
 const startserver = async () => {
     try {
