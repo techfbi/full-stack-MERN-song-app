@@ -34,8 +34,6 @@ const AuthContextProvider = ({ children }) => {
   }, [state.user]); // track state.user so we update token in the correct user object
 
   useEffect(() => {
-    // This is for RENDER DEPLOY sake to check if the backend is awake so that users wont get errors when they first visit the site
-
     const checkedUser = JSON.parse(localStorage.getItem("user"));
 
     const confirmationCheck = async () => {
