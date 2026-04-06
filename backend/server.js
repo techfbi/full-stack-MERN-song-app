@@ -6,11 +6,6 @@ import songRoutes from './routes/songroutes.js';
 import userRoutes from './routes/userRoutes.js';
 import cookieParser from 'cookie-parser'; // Import cookie-parser to handle cookies
 import helmet from "helmet";
-import path from 'path';
-import { fileURLToPath } from 'url';
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 
 dotenv.config();
 const app = express();
@@ -19,6 +14,7 @@ const app = express();
 app.set("trust proxy", 1);
 
 app.use(cookieParser()); // Add cookie-parser middleware to parse cookies in incoming requests
+app.use(express.static("dist"));
 
 // Set security headers with Helmet and configure Content Security Policy (CSP) to allow resources only from the same origin and trusted sources
 app.use(
@@ -67,12 +63,6 @@ app.get("/ping", (req, res) => {
 //routes
 app.use('/api/users', userRoutes);
 app.use('/api/songs', songRoutes);
-
-app.use(express.static(path.join(__dirname, "dist")))
-
-app.get("*", (req, res) => {
-  res.sendFile(path.resolve(__dirname, "dist", "index.html"));
-});
 
 
 //start server
