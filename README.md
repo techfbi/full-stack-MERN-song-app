@@ -8,11 +8,13 @@ Users can sign up, log in, add songs, edit them, and manage their own collection
 
 ## Live Demo
 
-[View Live App](#)
-
-*https://favvy-song.vercel.app/*
+#### *frontend (deployed on render)*
 
 *https://favvy-song.onrender.com/*
+
+#### *backend (deployed on varcel)*
+
+*https://full-stack-mern-song-app.vercel.app/*
 
 ---
 
@@ -97,7 +99,7 @@ backend/
 * Loading indicators for async actions (especially buttons)
 * Time-based feedback (e.g. “3 minutes ago”)
 * Conditional rendering (e.g. showing user email based on screen size)
-* Edit icon shows on song title mouse hover in tablet and pc, it shows on song title click in mobile
+* Edit icon shows when you hover on song title in tablet and pc, it shows when you click song title click in mobile
 * I used security questions as a way to verify authentic user before changing password since no mailer is implemented.
 
 ---
@@ -159,7 +161,8 @@ npm run dev
 * Modal-based editing
 * Responsive navigation
 * Input sanitization
-* Rate limiting for login to prevent brute force attacks 
+* Rate limiting for login to prevent brute force attacks
+* Greeting based on time in profile dashboard
 
 ---
 
